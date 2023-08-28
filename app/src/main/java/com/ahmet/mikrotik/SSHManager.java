@@ -4,6 +4,8 @@ import com.jcraft.jsch.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SSHManager {
     private String host;
@@ -47,7 +49,22 @@ public class SSHManager {
         }
 
         channel.disconnect();
-        return output.toString();
+        String line =output.toString();
+
+        String patternString = "tx-signal-strength=(...)"; // (...) üç karakteri temsil eder
+
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(line);
+
+        if (matcher.find()) {
+            String foundText = matcher.group(1); // İlk yakalanan parantez içindeki üç karakter
+            return foundText;
+        } else {
+            System.out.println("Desen bulunamadı.");
+        }
+
+
+        return line;
     }
 
     public void disconnect() {
