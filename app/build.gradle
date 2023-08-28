@@ -37,5 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'me.legrange:mikrotik:3.0.7'
+    implementation files('libs/jsch-0.1.55.jar') // JAR dosya adı ve yolunu güncelleyin
+
 
 }
